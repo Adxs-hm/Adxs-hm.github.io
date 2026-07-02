@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>GitHub Pages - 标签 - JHD</title>
+        <link>https://Adxs-hm.github.io/tags/github-pages/</link>
+        <description>GitHub Pages - 标签 - JHD</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 30 Jun 2026 12:36:13 &#43;0800</lastBuildDate><atom:link href="https://Adxs-hm.github.io/tags/github-pages/" rel="self" type="application/rss+xml" /><item>
+    <title>JHD 站点</title>
+    <link>https://Adxs-hm.github.io/posts/jhd-site/</link>
+    <pubDate>Tue, 30 Jun 2026 12:36:13 &#43;0800</pubDate>
+    <author>JHD</author>
+    <guid>https://Adxs-hm.github.io/posts/jhd-site/</guid>
+    <description><![CDATA[<h2 id="这个项目是什么">这个项目是什么</h2>
+<p><strong>JHD 站点</strong>是一个基于 Hugo 静态站点生成器构建的个人成果记录网站。它不只是一个博客——它是所有完成项目的<strong>统一入口和展示平台</strong>。你正在看的这个页面本身就是 JHD 站点的产物。</p>]]></description>
+</item>
+</channel>
+</rss>

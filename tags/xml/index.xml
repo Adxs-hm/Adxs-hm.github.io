@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>XML - 标签 - JHD</title>
+        <link>https://Adxs-hm.github.io/tags/xml/</link>
+        <description>XML - 标签 - JHD</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 30 Jun 2026 12:36:14 &#43;0800</lastBuildDate><atom:link href="https://Adxs-hm.github.io/tags/xml/" rel="self" type="application/rss+xml" /><item>
+    <title>STD Template Mod（遗落科技）</title>
+    <link>https://Adxs-hm.github.io/posts/std-template-mod/</link>
+    <pubDate>Tue, 30 Jun 2026 12:36:14 &#43;0800</pubDate>
+    <author>JHD</author>
+    <guid>https://Adxs-hm.github.io/posts/std-template-mod/</guid>
+    <description><![CDATA[<h2 id="这个项目是什么">这个项目是什么</h2>
+<p><strong>STD Template Mod</strong> 是 RimWorld 1.6 的一个纯 XML 内容模组（零 C# 代码）。作者 <strong>JHD</strong>，packageId <code>STD.Template.EarlyGame</code>，中文名&quot;遗落科技&quot;。</p>]]></description>
+</item>
+</channel>
+</rss>

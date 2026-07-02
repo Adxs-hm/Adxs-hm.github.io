@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>代码审查 - 标签 - JHD</title>
+        <link>https://Adxs-hm.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/</link>
+        <description>代码审查 - 标签 - JHD</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 30 Jun 2026 12:36:14 &#43;0800</lastBuildDate><atom:link href="https://Adxs-hm.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/" rel="self" type="application/rss+xml" /><item>
+    <title>STD Template Mod 审查报告 v2</title>
+    <link>https://Adxs-hm.github.io/posts/std-mod-review/</link>
+    <pubDate>Tue, 30 Jun 2026 12:36:14 &#43;0800</pubDate>
+    <author>JHD</author>
+    <guid>https://Adxs-hm.github.io/posts/std-mod-review/</guid>
+    <description><![CDATA[<h2 id="这是什么">这是什么</h2>
+<p>一份针对 <strong>STD Template Mod</strong> 的代码审查报告。采用&quot;<strong>参考 Mod 优先对比法</strong>&quot;——不是凭空编造标准，而是以 6 个实际发布且稳定运行的 Mod 作为对比基准，逐项审查 STD 的代码质量。</p>]]></description>
+</item>
+</channel>
+</rss>

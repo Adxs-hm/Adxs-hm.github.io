@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>教程 - 标签 - JHD</title>
+        <link>https://Adxs-hm.github.io/tags/%E6%95%99%E7%A8%8B/</link>
+        <description>教程 - 标签 - JHD</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 30 Jun 2026 12:36:14 &#43;0800</lastBuildDate><atom:link href="https://Adxs-hm.github.io/tags/%E6%95%99%E7%A8%8B/" rel="self" type="application/rss+xml" /><item>
+    <title>RimWorld Mod 制作完全指南（STD 实战版）</title>
+    <link>https://Adxs-hm.github.io/posts/rimworld-mod-guide/</link>
+    <pubDate>Tue, 30 Jun 2026 12:36:14 &#43;0800</pubDate>
+    <author>JHD</author>
+    <guid>https://Adxs-hm.github.io/posts/rimworld-mod-guide/</guid>
+    <description><![CDATA[<h2 id="这是什么">这是什么</h2>
+<p>一份以 <strong>STD Template Mod 开发过程为实战案例</strong>的 RimWorld 1.6 Mod 制作教学指南。704 行，最核心的价值是 <strong>18 个真实 Bug 的精确诊断</strong>——不是理论读物，而是踩完坑之后的复盘笔记。</p>]]></description>
+</item>
+</channel>
+</rss>

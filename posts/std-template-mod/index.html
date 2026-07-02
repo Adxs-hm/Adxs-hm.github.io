@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>STD Template Mod（遗落科技） - JHD</title><meta name="Description" content="RimWorld 1.6 纯 XML 失落科技模组——三级递进研究、功能整合设计哲学、零 C# 编译依赖"><meta property="og:url" content="https://Adxs-hm.github.io/posts/std-template-mod/">
+	<meta property="og:site_name" content="JHD">
+	<meta property="og:title" content="STD Template Mod（遗落科技）">
+	<meta property="og:description" content="RimWorld 1.6 纯 XML 失落科技模组——三级递进研究、功能整合设计哲学、零 C# 编译依赖">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-06-30T12:36:14+08:00">
+		<meta property="article:modified_time" content="2026-06-30T12:36:14+08:00">
+		<meta property="article:tag" content="RimWorld">
+		<meta property="article:tag" content="Mod">
+		<meta property="article:tag" content="XML">
+		<meta property="article:tag" content="游戏">
+		<meta property="og:image" content="https://Adxs-hm.github.io/images/planet-avatar.svg">
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://Adxs-hm.github.io/images/planet-avatar.svg">
+	<meta name="twitter:title" content="STD Template Mod（遗落科技）">
+	<meta name="twitter:description" content="RimWorld 1.6 纯 XML 失落科技模组——三级递进研究、功能整合设计哲学、零 C# 编译依赖">
+<meta name="application-name" content="JHD">
+<meta name="apple-mobile-web-app-title" content="JHD">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#0a0a1a"><meta name="msapplication-TileColor" content="#0d0d2b"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#e9b847"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Adxs-hm.github.io/posts/std-template-mod/" /><link rel="prev" href="https://Adxs-hm.github.io/posts/huashen-weiyin/" /><link rel="next" href="https://Adxs-hm.github.io/posts/std-mod-review/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "STD Template Mod（遗落科技）",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Adxs-hm.github.io\/posts\/std-template-mod\/"
+        },"image": ["https:\/\/Adxs-hm.github.io\/images\/planet-avatar.svg"],"genre": "posts","keywords": "RimWorld, Mod, XML, 游戏","wordcount":  3582 ,
+        "url": "https:\/\/Adxs-hm.github.io\/posts\/std-template-mod\/","datePublished": "2026-06-30T12:36:14+08:00","dateModified": "2026-06-30T12:36:14+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "JHD"
+            },"description": "RimWorld 1.6 纯 XML 失落科技模组——三级递进研究、功能整合设计哲学、零 C# 编译依赖"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'dark';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div>
+
+        <div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="JHD"><span class="header-title-pre"><span class='planet-icon'>🪐</span></span>JHD</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/articles/" title="所有文章记录"> 文章 </a><a class="menu-item" href="/projects/" title="所有项目记录"> 项目 </a><a class="menu-item" href="/milestones/" title="关键节点与里程碑"> 里程碑 </a><a class="menu-item" href="/about/" title="关于 JHD"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索记录..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="JHD"><span class="header-title-pre"><span class='planet-icon'>🪐</span></span>JHD</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索记录..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/articles/" title="所有文章记录">文章</a><a class="menu-item" href="/projects/" title="所有项目记录">项目</a><a class="menu-item" href="/milestones/" title="关键节点与里程碑">里程碑</a><a class="menu-item" href="/about/" title="关于 JHD">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">STD Template Mod（遗落科技）</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle" aria-hidden="true"></i>JHD</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E9%A1%B9%E7%9B%AE/"><i class="far fa-folder" aria-hidden="true"></i>项目</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt" aria-hidden="true"></i>&nbsp;<time datetime="2026-06-30">2026-06-30</time>&nbsp;<i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;约 3582 字&nbsp;
+                <i class="far fa-clock" aria-hidden="true"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#这个项目是什么">这个项目是什么</a></li>
+    <li><a href="#游戏体验流程">游戏体验流程</a></li>
+    <li><a href="#设计哲学">设计哲学</a>
+      <ul>
+        <li><a href="#1-功能整合一件顶多件">1. 功能整合——一件顶多件</a></li>
+        <li><a href="#2-理解即力量研究是瓶颈">2. 理解即力量——研究是瓶颈</a></li>
+        <li><a href="#3-材料极简">3. 材料极简</a></li>
+      </ul>
+    </li>
+    <li><a href="#物品详细规格">物品详细规格</a>
+      <ul>
+        <li><a href="#重构合金基础材料">重构合金（基础材料）</a></li>
+        <li><a href="#力场能量枪-mct-iiiiii">力场能量枪 MCT-I/II/III</a></li>
+        <li><a href="#护盾腰带-ec-iiiiii">护盾腰带 EC-I/II/III</a></li>
+        <li><a href="#配给口粮--急救包-iiiiii">配给口粮 + 急救包 I/II/III</a></li>
+        <li><a href="#永久强化剂-rp-iiiiii">永久强化剂 RP-I/II/III</a></li>
+        <li><a href="#死亡相关物品">死亡相关物品</a></li>
+      </ul>
+    </li>
+    <li><a href="#技术实现">技术实现</a>
+      <ul>
+        <li><a href="#xml-架构模式">XML 架构模式</a></li>
+        <li><a href="#研究树">研究树</a></li>
+        <li><a href="#贴图管线">贴图管线</a></li>
+        <li><a href="#-已知问题">⚠️ 已知问题</a></li>
+      </ul>
+    </li>
+    <li><a href="#文件统计">文件统计</a></li>
+    <li><a href="#与终局世界观的关联">与终局世界观的关联</a></li>
+    <li><a href="#相关项目">相关项目</a></li>
+    <li><a href="#完成时间">完成时间</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="这个项目是什么">这个项目是什么</h2>
+<p><strong>STD Template Mod</strong> 是 RimWorld 1.6 的一个纯 XML 内容模组（零 C# 代码）。作者 <strong>JHD</strong>，packageId <code>STD.Template.EarlyGame</code>，中文名&quot;遗落科技&quot;。</p>
+<p>核心玩法：殖民者建造一座&quot;STD 分析台&quot;，通过三级递进研究——基础理解 → 进阶解码 → 深度掌握——逐步解锁一系列远超原版的失落科技装备。所有产物仅需两种材料：<strong>钢铁</strong> 和 <strong>重构合金</strong>（50 钢铁在分析台烧制成 1 合金）。</p>
+<p>&ldquo;STD&quot;命名源于设定中&quot;Standard Template Data&rdquo;（标准模板数据）的概念——一种失落文明遗留下来的技术编码格式。分析台就是解码这些模板的设备。</p>
+<h2 id="游戏体验流程">游戏体验流程</h2>
+<p>以一个典型的新殖民地为例，STD 科技的体验路线：</p>
+<p><strong>阶段 1：发现与初探（研究等级 1-2）</strong></p>
+<ul>
+<li>殖民者首先研究&quot;模板信号解析&quot;，解锁 STD 分析台的建造配方</li>
+<li>建造分析台后，可以将 50 钢铁转化为 1 重构合金——合金带有蓝色辉光，美观度 ×4，本身就是很好的建材和装饰品</li>
+<li>继续研究&quot;基础力场应用&quot;，解锁 MCT-I 力场能量枪和 EC-I 护盾腰带</li>
+<li>此时殖民者获得一把比原版突击步枪更强（28 射程 vs 31，但 22×2 伤害且带灼烧）的武器，外加一条 +60% 工作速度的腰带</li>
+</ul>
+<p><strong>阶段 2：进阶应用（研究等级 3-5）</strong></p>
+<ul>
+<li>解锁 II 级装备：MCT-II（32×3 发/33 射程/灼烧/120% 工速）、EC-II（8 次护盾拦截/±100°C 温控/88% 近战闪避/80% 工速）</li>
+<li>解锁配给口粮和急救包的生产线——一个配方同时产出食物和药物，口粮永不腐烂</li>
+<li>此时一个装备 II 级护盾腰带的殖民者在极端气候下几乎不需要额外的温度管理</li>
+</ul>
+<p><strong>阶段 3：深度掌握（研究等级 6-10）</strong></p>
+<ul>
+<li>III 级装备解锁，各项数值远超原版任何装备</li>
+<li>永久强化剂 RP-III 可将殖民者的全器官能力提升至超越人类的水平</li>
+<li>模板复生剂和拒死剂提供原版最稀缺的资源——&ldquo;第二次机会&rdquo;</li>
+<li>此时 STD 科技殖民地的战斗力约等于原版的 3-4 倍</li>
+</ul>
+<h2 id="设计哲学">设计哲学</h2>
+<h3 id="1-功能整合一件顶多件">1. 功能整合——一件顶多件</h3>
+<p>原版 RimWorld 中，提升工作速度需要仿生臂、远程攻击需要枪、近战防御需要护盾腰带——三件装备占用三个槽位。STD 的做�是把多种功能整合到一件装备中。</p>
+<p><strong>护盾腰带 EC-III 功能拆解：</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>功能</th>
+					<th>原版等效装备/方式</th>
+					<th>原版槽位</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>能量护盾（~12 次拦截）</td>
+					<td>护盾腰带</td>
+					<td>腰带</td>
+			</tr>
+			<tr>
+					<td>区域照明</td>
+					<td>落地灯 / 黑暗环境不便</td>
+					<td>建筑</td>
+			</tr>
+			<tr>
+					<td>±200°C 温度调节</td>
+					<td>防寒/防热衣物各一套</td>
+					<td>外层+中层</td>
+			</tr>
+			<tr>
+					<td>95% 近战闪避</td>
+					<td>高品质护盾腰带 + 敏捷特性</td>
+					<td>-</td>
+			</tr>
+			<tr>
+					<td>75% 近战减伤</td>
+					<td>海军装甲 + 高品质</td>
+					<td>外层+中层</td>
+			</tr>
+			<tr>
+					<td>+150% 工作速度</td>
+					<td>仿生臂 ×2 + 工作勤奋特性</td>
+					<td>-</td>
+			</tr>
+			<tr>
+					<td>痛阈/毒素/免疫/研究</td>
+					<td>各类仿生器官 + 药物</td>
+					<td>多个槽位</td>
+			</tr>
+	</tbody>
+</table>
+<p>一条 EC-III 腰带 ≈ 原版 6-8 件装备的效果总和，且只占用一个腰带槽位。</p>
+<h3 id="2-理解即力量研究是瓶颈">2. 理解即力量——研究是瓶颈</h3>
+<table>
+	<thead>
+			<tr>
+					<th>研究等级</th>
+					<th>项目数</th>
+					<th>典型研究耗时</th>
+					<th>解锁</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>基础理解</td>
+					<td>2</td>
+					<td>~3,000 点</td>
+					<td>I 级装备，合金配方</td>
+			</tr>
+			<tr>
+					<td>进阶解码</td>
+					<td>3</td>
+					<td>~8,000 点</td>
+					<td>II 级装备，口粮/急救包</td>
+			</tr>
+			<tr>
+					<td>深度掌握</td>
+					<td>5</td>
+					<td>~25,000 点</td>
+					<td>III 级装备，永久强化剂，复活系列</td>
+			</tr>
+	</tbody>
+</table>
+<p>10 个研究项目总计约 36,000 研究点——相当于原版从石器时代到太空时代的全部研究点总和。瓶颈是<strong>研究时间</strong>而非资源收集。</p>
+<h3 id="3-材料极简">3. 材料极简</h3>
+<p>不使用任何稀有材料。不要求零部件、高级零部件、超凡材料。任何发展阶段的殖民地都能使用 STD 科技——只要你愿意投入研究时间。这使得 STD Mod 在&quot;低科技开局&quot;的玩法中特别有价值。</p>
+<h2 id="物品详细规格">物品详细规格</h2>
+<h3 id="重构合金基础材料">重构合金（基础材料）</h3>
+<p>合金是在分析台中通过&quot;力场重构&quot;工艺制造的——模板信号改变钢铁的晶体结构，产物带有蓝色辉光。</p>
+<table>
+	<thead>
+			<tr>
+					<th>属性</th>
+					<th>值</th>
+					<th>对比钢铁</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>生命值(HP)</td>
+					<td>300</td>
+					<td>钢铁 100（×3）</td>
+			</tr>
+			<tr>
+					<td>工作量</td>
+					<td>0.4</td>
+					<td>钢铁 1.0（更快加工）</td>
+			</tr>
+			<tr>
+					<td>质量(kg)</td>
+					<td>0.6</td>
+					<td>钢铁 1.0（更轻）</td>
+			</tr>
+			<tr>
+					<td>美观度</td>
+					<td>4</td>
+					<td>钢铁 0（无美观）</td>
+			</tr>
+			<tr>
+					<td>隔热系数</td>
+					<td>2.0</td>
+					<td>钢铁 1.0（×2）</td>
+			</tr>
+			<tr>
+					<td>配方</td>
+					<td>50 钢铁 → 1 合金</td>
+					<td>分析台专属</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="力场能量枪-mct-iiiiii">力场能量枪 MCT-I/II/III</h3>
+<p>三种自定义 DamageDef：</p>
+<ul>
+<li><code>STD_FieldCut</code>（场切割）——基础伤害类型，对有机体和机械均有中等效果</li>
+<li><code>STD_FieldBurn</code>（场灼烧）——附带点燃概率，对植被和可燃物有效</li>
+<li><code>STD_FieldBolt</code>（场能弹）——能量弹丸，穿透力强，对装甲有加成</li>
+</ul>
+<table>
+	<thead>
+			<tr>
+					<th>参数</th>
+					<th>MCT-I</th>
+					<th>MCT-II</th>
+					<th>MCT-III</th>
+					<th>原版突击步枪（对比）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>伤害</td>
+					<td>22</td>
+					<td>32</td>
+					<td>44</td>
+					<td>11</td>
+			</tr>
+			<tr>
+					<td>弹数/轮</td>
+					<td>2</td>
+					<td>3</td>
+					<td>3</td>
+					<td>3</td>
+			</tr>
+			<tr>
+					<td>DPS</td>
+					<td>~14</td>
+					<td>~30</td>
+					<td>~42</td>
+					<td>~7</td>
+			</tr>
+			<tr>
+					<td>射程</td>
+					<td>28</td>
+					<td>33</td>
+					<td>40</td>
+					<td>31</td>
+			</tr>
+			<tr>
+					<td>预热</td>
+					<td>1.2s</td>
+					<td>1.0s</td>
+					<td>0.8s</td>
+					<td>1.5s</td>
+			</tr>
+			<tr>
+					<td>冷却</td>
+					<td>1.8s</td>
+					<td>1.6s</td>
+					<td>1.4s</td>
+					<td>1.5s</td>
+			</tr>
+			<tr>
+					<td>工作速度</td>
+					<td>+60%</td>
+					<td>+120%</td>
+					<td>+250%</td>
+					<td>0</td>
+			</tr>
+			<tr>
+					<td>伤害类型</td>
+					<td>FieldCut</td>
+					<td>FieldCut+Burn</td>
+					<td>FieldBolt</td>
+					<td>Sharp</td>
+			</tr>
+			<tr>
+					<td>护甲穿透</td>
+					<td>15%</td>
+					<td>25%</td>
+					<td>40%</td>
+					<td>16%</td>
+			</tr>
+	</tbody>
+</table>
+<p>MCT-III 的 DPS（~42）是原版突击步枪（~7）的 6 倍。在熟练射手手中，可以稳定单杀任何非机械族单位。</p>
+<h3 id="护盾腰带-ec-iiiiii">护盾腰带 EC-I/II/III</h3>
+<p>护盾腰带对应的 Hediff 包含多达 12 个 <code>statOffsets</code> 条目：</p>
+<table>
+	<thead>
+			<tr>
+					<th>属性</th>
+					<th>EC-I</th>
+					<th>EC-II</th>
+					<th>EC-III</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>护盾最大值(HP)</td>
+					<td>110</td>
+					<td>220</td>
+					<td>380</td>
+			</tr>
+			<tr>
+					<td>充能速度(/s)</td>
+					<td>8.5</td>
+					<td>15</td>
+					<td>28</td>
+			</tr>
+			<tr>
+					<td>温控偏移(°C)</td>
+					<td>±50</td>
+					<td>±100</td>
+					<td>±200</td>
+			</tr>
+			<tr>
+					<td>近战闪避率</td>
+					<td>0.75</td>
+					<td>0.88</td>
+					<td>0.95</td>
+			</tr>
+			<tr>
+					<td>近战减伤</td>
+					<td>0.40</td>
+					<td>0.60</td>
+					<td>0.75</td>
+			</tr>
+			<tr>
+					<td>全局工作速度</td>
+					<td>+40%</td>
+					<td>+80%</td>
+					<td>+150%</td>
+			</tr>
+			<tr>
+					<td>痛阈</td>
+					<td>+40%</td>
+					<td>+60%</td>
+					<td>+80%</td>
+			</tr>
+			<tr>
+					<td>毒素抵抗</td>
+					<td>0.50</td>
+					<td>0.70</td>
+					<td>0.85</td>
+			</tr>
+			<tr>
+					<td>免疫速度</td>
+					<td>+30%</td>
+					<td>+50%</td>
+					<td>+80%</td>
+			</tr>
+			<tr>
+					<td>研究速度</td>
+					<td>+20%</td>
+					<td>+35%</td>
+					<td>+60%</td>
+			</tr>
+			<tr>
+					<td>移动速度</td>
+					<td>+10%</td>
+					<td>+20%</td>
+					<td>+35%</td>
+			</tr>
+			<tr>
+					<td>全局学习率</td>
+					<td>+15%</td>
+					<td>+25%</td>
+					<td>+45%</td>
+			</tr>
+	</tbody>
+</table>
+<p>EC-III 护盾腰带还附带区域光源（光照半径 5 格，颜色为蓝色），可替代落地灯。</p>
+<h3 id="配给口粮--急救包-iiiiii">配给口粮 + 急救包 I/II/III</h3>
+<p>口粮和急救包使用<strong>联合配方</strong>——在生产分析台上进行一次操作，同时产出食物和药物：</p>
+<table>
+	<thead>
+			<tr>
+					<th>参数</th>
+					<th>I 级</th>
+					<th>II 级</th>
+					<th>III 级</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>口粮营养值</td>
+					<td>2.0</td>
+					<td>2.5</td>
+					<td>3.0</td>
+			</tr>
+			<tr>
+					<td>口粮心情加成</td>
+					<td>+18</td>
+					<td>+22</td>
+					<td>+25</td>
+			</tr>
+			<tr>
+					<td>急救包医疗效力</td>
+					<td>2.5</td>
+					<td>4.0</td>
+					<td>5.0</td>
+			</tr>
+			<tr>
+					<td>急救包最大品质</td>
+					<td>大师</td>
+					<td>传奇</td>
+					<td>传奇</td>
+			</tr>
+			<tr>
+					<td>永不腐烂</td>
+					<td>✓</td>
+					<td>✓</td>
+					<td>✓</td>
+			</tr>
+			<tr>
+					<td>代谢优化（饥饿速率）</td>
+					<td>-50%</td>
+					<td>-67%</td>
+					<td>-80%</td>
+			</tr>
+	</tbody>
+</table>
+<p>代谢优化 Hediff（<code>STD_MetabolicOptimization</code>）通过降低饥饿速率来延长食物供给的有效时间——III 级可将单人口粮维持时间从 1.5 天延长至 7.5 天。</p>
+<h3 id="永久强化剂-rp-iiiiii">永久强化剂 RP-I/II/III</h3>
+<p>右键使用的消耗品，永久提升全器官能力。强化的器官包括：大脑（意识）、眼（视觉）、耳（听觉）、心（泵血）、肝（代谢）、肾（过滤）、肺（呼吸）、胃（消化）、臂（操作）、腿（移动）。</p>
+<table>
+	<thead>
+			<tr>
+					<th>等级</th>
+					<th>单项加成</th>
+					<th>伤疤修复</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>RP-I</td>
+					<td>+15%</td>
+					<td>无</td>
+			</tr>
+			<tr>
+					<td>RP-II</td>
+					<td>+30%</td>
+					<td>新伤疤自动修复</td>
+			</tr>
+			<tr>
+					<td>RP-III</td>
+					<td>+50%</td>
+					<td>全部旧伤疤也可修复</td>
+			</tr>
+	</tbody>
+</table>
+<p>III 级强化剂的最终效果：意识 150%、移动 150%、操作 150%、泵血 150%、代谢 150%、呼吸 150%。这个数值在游戏机制中已经超越了&quot;人类&quot;的生物学极限。</p>
+<h3 id="死亡相关物品">死亡相关物品</h3>
+<table>
+	<thead>
+			<tr>
+					<th>物品</th>
+					<th>机制</th>
+					<th>使用条件</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>模板复生剂</td>
+					<td>对尸体使用 → 复活殖民者，同时给予 3 支复苏剂</td>
+					<td>死亡 ≤ 3 天，尸体存在</td>
+			</tr>
+			<tr>
+					<td>模板拒死剂</td>
+					<td>对自己使用 → 获得 <code>STD_DeathRefusal</code> Hediff → 死亡时消耗 Hediff，自动复活</td>
+					<td>需要 Anomaly DLC</td>
+			</tr>
+			<tr>
+					<td>模板复苏剂</td>
+					<td>清除复活虚弱/精神病/昏迷/失忆等复活后遗症</td>
+					<td>复活后使用</td>
+			</tr>
+	</tbody>
+</table>
+<p>复活机制完全依赖 Anomaly DLC 的 <code>CompUseEffect_Resurrect</code> 类和 <code>DeathRefusal</code> 机制。这是 About.xml 中未声明 Anomaly 依赖的 P0 缺陷的原因。</p>
+<h2 id="技术实现">技术实现</h2>
+<h3 id="xml-架构模式">XML 架构模式</h3>
+<p><strong>Abstract 基类继承：</strong></p>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        <span class="copy" title="复制到剪贴板"><i class="far fa-copy" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>ThingDef_Base (Abstract)
+  ├── STD_Alloy (继承 Base)
+  │     └── stats: HP×3, Work×0.4, Mass×0.6, Beauty×4, Insulation×2
+  ├── STD_Weapon_Base (Abstract, 继承 Base)
+  │     ├── MCT-I (具体武器参数)
+  │     ├── MCT-II
+  │     └── MCT-III
+  ├── STD_Apparel_Base (Abstract, 继承 Base)
+  │     ├── EC-I (具体腰带参数)
+  │     ├── EC-II
+  │     └── EC-III
+  └── STD_Ingestible_Base (Abstract, 继承 Base)
+        ├── Supply-I
+        ├── Supply-II
+        └── Supply-III</code></pre></div>
+<p>这种继承结构将公共属性（如所有 III 级物品所需的研究前提、所有能量武器的伤害类型）抽取到基类中，减少重复代码约 40%。</p>
+<h3 id="研究树">研究树</h3>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        <span class="copy" title="复制到剪贴板"><i class="far fa-copy" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>基础理解 (2项)
+  ├── 模板信号解析 (1,500 点) → 解锁分析台建造
+  └── 基础力场应用 (1,500 点) → 解锁 I 级装备
+        ↓
+进阶解码 (3项)
+  ├── 中级模板解码 (3,000 点) → 解锁 II 级配方
+  ├── 配给整合系统 (2,500 点) → 解锁口粮/急救包
+  └── 场约束理论 (2,500 点) → 解锁 EC-II
+        ↓
+深度掌握 (5项)
+  ├── 高级力场控制 (6,000 点) → 解锁 III 级配方
+  ├── 人体强化应用 (5,000 点) → 解锁 RP 强化剂
+  ├── 生物场重组 (4,500 点) → 解锁 III 级护盾
+  ├── 意识锚定理论 (5,000 点) → 解锁复生剂/拒死剂
+  └── 终极模板整合 (4,500 点) → 解锁全部 III 级最终形态</code></pre></div>
+<h3 id="贴图管线">贴图管线</h3>
+<ol>
+<li><strong>Blender 建模</strong>：在 Blender 中建立精确的 3D 模型（分析台、武器、护盾腰带），使用 Cycles 渲染为高分辨率 PNG（1024×1024）</li>
+<li><strong>AI 风格转换</strong>：使用 AI 工具将渲染图统一转换为 RimWorld 原版的水彩/手绘风格</li>
+<li><strong>Python 批处理</strong>：PIL 脚本裁剪为 256×256、转换为 PNG、应用到正确的命名规范（<code>STD_FieldGun.png</code>、<code>STD_ShieldBelt.png</code> 等）</li>
+<li><strong>贴图验证</strong>：在游戏内检查 UI 图标大小（256×256 最佳）和世界渲染效果</li>
+</ol>
+<h3 id="-已知问题">⚠️ 已知问题</h3>
+<table>
+	<thead>
+			<tr>
+					<th>优先级</th>
+					<th>问题</th>
+					<th>影响</th>
+					<th>修复方案</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>P0</td>
+					<td>About.xml 未声明 Anomaly DLC 依赖</td>
+					<td>无 Anomaly 玩家崩溃</td>
+					<td>添加 <code>modDependencies</code> 或 <code>loadAfter</code></td>
+			</tr>
+			<tr>
+					<td>P0</td>
+					<td>无 Languages 翻译文件夹</td>
+					<td>不符合发布规范</td>
+					<td>创建 <code>Languages/</code> 含中英双语</td>
+			</tr>
+			<tr>
+					<td>P1</td>
+					<td><code>STD_FieldCut</code> 的 armorCategory 与 hediff 不匹配</td>
+					<td>伤害/护甲计算异常</td>
+					<td>统一为 Cut 类型</td>
+			</tr>
+			<tr>
+					<td>P1</td>
+					<td>分析台缺少标准 Building 组件</td>
+					<td>部分游戏机制失效</td>
+					<td>添加 minifiedDef/Flickable/Power/placeWorkers</td>
+			</tr>
+			<tr>
+					<td>P2</td>
+					<td>Preview.png 547KB</td>
+					<td>加载慢</td>
+					<td>压缩至 ≤100KB</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="文件统计">文件统计</h2>
+<table>
+	<thead>
+			<tr>
+					<th>类型</th>
+					<th>数量</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>XML Def</td>
+					<td>9</td>
+					<td>00_Core → 09_Resurrection</td>
+			</tr>
+			<tr>
+					<td>贴图 PNG</td>
+					<td>7</td>
+					<td>物品×5 + 建筑×1 + 弹丸×1</td>
+			</tr>
+			<tr>
+					<td>Preview</td>
+					<td>1</td>
+					<td>Mod 预览图</td>
+			</tr>
+			<tr>
+					<td>About.xml</td>
+					<td>1</td>
+					<td>Mod 元数据</td>
+			</tr>
+			<tr>
+					<td>总文件</td>
+					<td>18</td>
+					<td>纯 XML 零 C#</td>
+			</tr>
+			<tr>
+					<td>代码行数</td>
+					<td>~1,200+</td>
+					<td>含 XML 注释和标签</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="与终局世界观的关联">与终局世界观的关联</h2>
+<p>&ldquo;STD&rdquo;（Standard Template Data）概念与「终局时代」设定中的&quot;模板&quot;（Template）同源——都是对本体信息的标准化编码。Mod 中的&quot;模板信号解码&quot;研究，在设定层面对应终局时代中人类重新发现&quot;元模板&quot;（Meta-Templates）的过程。</p>
+<p>这不是一个单纯的游戏 Mod——它是「终局时代」世界观在 RimWorld 机制层面的一个具象化实验。</p>
+<h2 id="相关项目">相关项目</h2>
+<ul>
+<li><strong>RimWorld Mod 制作完全指南</strong>（704 行）——以此 Mod 为案例的实战开发教程</li>
+<li><strong>STD Mod 审查报告 v2</strong>（663 行）——参考 Mod 优先对比法的质量评估</li>
+</ul>
+<h2 id="完成时间">完成时间</h2>
+<p>约 <strong>2026 年 6 月</strong></p>
+</div><nav class="post-navigation" style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(100,140,220,0.15);"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem;"><a href="/posts/huashen-weiyin/" style="color: #8a9cc0; font-weight: 400; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.color='#c0d4f4'" onmouseout="this.style.color='#8a9cc0'">← 化身为影</a><a href="/posts/std-mod-review/" style="color: #8a9cc0; font-weight: 400; text-decoration: none; transition: all 0.2s ease; text-align: right;" onmouseover="this.style.color='#c0d4f4'" onmouseout="this.style.color='#8a9cc0'">STD Template Mod 审查报告 v2 →</a></div><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;"><a href="/projects/" style="color: #f0c060; font-weight: 500; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.textShadow='0 0 10px rgba(240,192,96,0.4)'" onmouseout="this.style.textShadow='none'">← 返回项目列表</a><a href="/posts/" style="color: #8a9cc0; font-weight: 400; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.color='#c0d4f4'" onmouseout="this.style.color='#8a9cc0'">所有记录 →</a>
+            </div>
+        </nav><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2026-06-30</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 X" data-sharer="x" data-url="https://Adxs-hm.github.io/posts/std-template-mod/" data-title="STD Template Mod（遗落科技）" data-hashtags="RimWorld,Mod,XML,游戏"><i class="fab fa-x-twitter" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Threads" data-sharer="threads" data-url="https://Adxs-hm.github.io/posts/std-template-mod/" data-title="STD Template Mod（遗落科技）"><i class="fab fa-threads" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://Adxs-hm.github.io/posts/std-template-mod/" data-hashtag="RimWorld"><i class="fab fa-facebook-square" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://Adxs-hm.github.io/posts/std-template-mod/"><i class="fab fa-linkedin" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://Adxs-hm.github.io/posts/std-template-mod/" data-title="STD Template Mod（遗落科技）"><i class="fab fa-hacker-news" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://Adxs-hm.github.io/posts/std-template-mod/" data-title="STD Template Mod（遗落科技）"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://Adxs-hm.github.io/posts/std-template-mod/" data-title="STD Template Mod（遗落科技）"><i class="fab fa-weibo" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Diaspora" data-sharer="diaspora" data-url="https://Adxs-hm.github.io/posts/std-template-mod/" data-title="STD Template Mod（遗落科技）" data-description="RimWorld 1.6 纯 XML 失落科技模组——三级递进研究、功能整合设计哲学、零 C# 编译依赖"><i class="fab fa-diaspora" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=https%3a%2f%2fAdxs-hm.github.io%2fposts%2fstd-template-mod%2f&amp;text=STD%20Template%20Mod%ef%bc%88%e9%81%97%e8%90%bd%e7%a7%91%e6%8a%80%ef%bc%89" target="_blank" title="分享到 Telegram"><i class="fab fa-telegram" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags" aria-hidden="true"></i>&nbsp;<a href="/tags/rimworld/">RimWorld</a>,&nbsp;<a href="/tags/mod/">Mod</a>,&nbsp;<a href="/tags/xml/">XML</a>,&nbsp;<a href="/tags/%E6%B8%B8%E6%88%8F/">游戏</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/huashen-weiyin/" class="prev" rel="prev" title="化身为影"><i class="fas fa-angle-left" aria-hidden="true"></i>化身为影</a>
+            <a href="/posts/std-mod-review/" class="next" rel="next" title="STD Template Mod 审查报告 v2">STD Template Mod 审查报告 v2<i class="fas fa-angle-right" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><span style="font-size:0.78rem;color:#6a80a0;">本站所有内容为原创或基于个人创作整理。如有与其他作品相似之处，纯属巧合。</span></div><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.163.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 1.0.0"><i class="far fa-kiss-wink-heart" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright" aria-hidden="true"></i><span itemprop="copyrightYear">2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">JHD</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons">
+            <a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden">
+            <a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/css/space-theme-v2.css"><script src="/lib/autocomplete/autocomplete.min.js"></script><script src="/lib/fuse/fuse.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"fuseIndexURL":"/index.json","fuseOpts":{"distance":100,"findAllMatches":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"minMatchCharLength":2,"threshold":0.3},"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"fuse"}};</script><script src="/js/theme.js"></script>
+        <script src="/js/space-fx.js"></script>
+        
+        <script src="/js/jhd-search.js"></script>
+    </body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>STD Template Mod 审查报告 v2 - JHD</title><meta name="Description" content="参考 Mod 优先对比法的代码审查——以 6 个已发布 Mod 为基准，12 项待整改清单，三级健康度评分"><meta property="og:url" content="https://Adxs-hm.github.io/posts/std-mod-review/">
+	<meta property="og:site_name" content="JHD">
+	<meta property="og:title" content="STD Template Mod 审查报告 v2">
+	<meta property="og:description" content="参考 Mod 优先对比法的代码审查——以 6 个已发布 Mod 为基准，12 项待整改清单，三级健康度评分">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-06-30T12:36:14+08:00">
+		<meta property="article:modified_time" content="2026-06-30T12:36:14+08:00">
+		<meta property="article:tag" content="RimWorld">
+		<meta property="article:tag" content="代码审查">
+		<meta property="article:tag" content="质量评估">
+		<meta property="article:tag" content="Mod">
+		<meta property="og:image" content="https://Adxs-hm.github.io/images/planet-avatar.svg">
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://Adxs-hm.github.io/images/planet-avatar.svg">
+	<meta name="twitter:title" content="STD Template Mod 审查报告 v2">
+	<meta name="twitter:description" content="参考 Mod 优先对比法的代码审查——以 6 个已发布 Mod 为基准，12 项待整改清单，三级健康度评分">
+<meta name="application-name" content="JHD">
+<meta name="apple-mobile-web-app-title" content="JHD">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#0a0a1a"><meta name="msapplication-TileColor" content="#0d0d2b"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#e9b847"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Adxs-hm.github.io/posts/std-mod-review/" /><link rel="prev" href="https://Adxs-hm.github.io/posts/std-template-mod/" /><link rel="next" href="https://Adxs-hm.github.io/posts/rimworld-mod-guide/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "STD Template Mod 审查报告 v2",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Adxs-hm.github.io\/posts\/std-mod-review\/"
+        },"image": ["https:\/\/Adxs-hm.github.io\/images\/planet-avatar.svg"],"genre": "posts","keywords": "RimWorld, 代码审查, 质量评估, Mod","wordcount":  1491 ,
+        "url": "https:\/\/Adxs-hm.github.io\/posts\/std-mod-review\/","datePublished": "2026-06-30T12:36:14+08:00","dateModified": "2026-06-30T12:36:14+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "JHD"
+            },"description": "参考 Mod 优先对比法的代码审查——以 6 个已发布 Mod 为基准，12 项待整改清单，三级健康度评分"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'dark';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div>
+
+        <div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="JHD"><span class="header-title-pre"><span class='planet-icon'>🪐</span></span>JHD</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/articles/" title="所有文章记录"> 文章 </a><a class="menu-item" href="/projects/" title="所有项目记录"> 项目 </a><a class="menu-item" href="/milestones/" title="关键节点与里程碑"> 里程碑 </a><a class="menu-item" href="/about/" title="关于 JHD"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索记录..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="JHD"><span class="header-title-pre"><span class='planet-icon'>🪐</span></span>JHD</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索记录..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/articles/" title="所有文章记录">文章</a><a class="menu-item" href="/projects/" title="所有项目记录">项目</a><a class="menu-item" href="/milestones/" title="关键节点与里程碑">里程碑</a><a class="menu-item" href="/about/" title="关于 JHD">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">STD Template Mod 审查报告 v2</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle" aria-hidden="true"></i>JHD</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E9%A1%B9%E7%9B%AE/"><i class="far fa-folder" aria-hidden="true"></i>项目</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt" aria-hidden="true"></i>&nbsp;<time datetime="2026-06-30">2026-06-30</time>&nbsp;<i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;约 1491 字&nbsp;
+                <i class="far fa-clock" aria-hidden="true"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#这是什么">这是什么</a></li>
+    <li><a href="#方法论参考-mod-优先对比法">方法论：参考 Mod 优先对比法</a>
+      <ul>
+        <li><a href="#为什么需要特殊方法">为什么需要特殊方法</a></li>
+        <li><a href="#参考-mod-选取理由">参考 Mod 选取理由</a></li>
+        <li><a href="#对比流程">对比流程</a></li>
+      </ul>
+    </li>
+    <li><a href="#健康度评估">健康度评估</a></li>
+    <li><a href="#问题清单完整">问题清单（完整）</a>
+      <ul>
+        <li><a href="#p0--必须立即修复">P0 —— 必须立即修复</a></li>
+        <li><a href="#p1--发布前务必修复">P1 —— 发布前务必修复</a></li>
+        <li><a href="#p2--影响用户体验">P2 —— 影响用户体验</a></li>
+        <li><a href="#p3--优化建议">P3 —— 优化建议</a></li>
+      </ul>
+    </li>
+    <li><a href="#审查统计">审查统计</a></li>
+    <li><a href="#方法论可复用性">方法论可复用性</a></li>
+    <li><a href="#审查者">审查者</a></li>
+    <li><a href="#相关项目">相关项目</a></li>
+    <li><a href="#完成时间">完成时间</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="这是什么">这是什么</h2>
+<p>一份针对 <strong>STD Template Mod</strong> 的代码审查报告。采用&quot;<strong>参考 Mod 优先对比法</strong>&quot;——不是凭空编造标准，而是以 6 个实际发布且稳定运行的 Mod 作为对比基准，逐项审查 STD 的代码质量。</p>
+<p>审查日期：<strong>2026-06-29</strong>。共 663 行。发现 12 项待整改问题（P0 → P3）。</p>
+<h2 id="方法论参考-mod-优先对比法">方法论：参考 Mod 优先对比法</h2>
+<h3 id="为什么需要特殊方法">为什么需要特殊方法</h3>
+<p>传统审查的问题：审查者自己设定&quot;正确标准&quot;，但这个标准可能与社区实际不符——审查者认为的&quot;错误&quot;可能是社区广泛接受的&quot;惯例&quot;。</p>
+<p><strong>参考 Mod 优先对比法</strong> 的核心：选取已在 Steam Workshop 发布、有数千订阅的 Mod 作为<strong>基准模板</strong>。对于 STD 的每个 XML 文件，找到参考 Mod 中对应的同类文件，逐字段对比差异。差异不一定都是错误，但每个差异都会被追问&quot;为什么不同&quot;。</p>
+<h3 id="参考-mod-选取理由">参考 Mod 选取理由</h3>
+<table>
+	<thead>
+			<tr>
+					<th>参考 Mod</th>
+					<th>选取理由</th>
+					<th>订阅数参考</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>UF Heavy Industries</strong>（联合重工）</td>
+					<td>主要参考——同为国产 Mod，也含工作台/能量武器/护盾/研究/Hediff/完整翻译</td>
+					<td>高</td>
+			</tr>
+			<tr>
+					<td><strong>Ancot Library</strong></td>
+					<td>辅助参考——护盾 Hediff/WorkGiver 实现/翻译结构</td>
+					<td>中</td>
+			</tr>
+			<tr>
+					<td><strong>Glitterworld Destroyer 5</strong></td>
+					<td>辅助参考——机械族扩展，DLC 兼容处理</td>
+					<td>中</td>
+			</tr>
+			<tr>
+					<td>Humanoid Alien Races</td>
+					<td>参考大型框架 Mod 的 About.xml 规范</td>
+					<td>极高</td>
+			</tr>
+			<tr>
+					<td>HugsLib</td>
+					<td>参考通用库的依赖声明方式</td>
+					<td>极高</td>
+			</tr>
+			<tr>
+					<td>Vanilla Expanded Framework</td>
+					<td>参考 VEF 系列的代码组织</td>
+					<td>极高</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="对比流程">对比流程</h3>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-text">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        <span class="copy" title="复制到剪贴板"><i class="far fa-copy" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">1. 定位文件   → 在 STD Mod 中找到每个 XML 文件
+</span></span><span class="line"><span class="cl">2. 匹配参照   → 在参考 Mod 中找到功能最接近的对应文件
+</span></span><span class="line"><span class="cl">3. 逐字比对   → 字段名/嵌套层级/属性值/缺失字段
+</span></span><span class="line"><span class="cl">4. 差异分类   → 标记为 P0(致命)/P1(严重)/P2(影响体验)/P3(优化建议)
+</span></span><span class="line"><span class="cl">5. 改进方案   → 每个 P0/P1 问题附带具体修复建议</span></span></code></pre></div></div>
+<h2 id="健康度评估">健康度评估</h2>
+<table>
+	<thead>
+			<tr>
+					<th>评估维度</th>
+					<th>评分(1-10)</th>
+					<th>风险等级</th>
+					<th>核心问题</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>XML 规范性</td>
+					<td>6/10</td>
+					<td>🟡 黄</td>
+					<td>存在字段名错误、弃用字段、格式不规范</td>
+			</tr>
+			<tr>
+					<td>DLC 兼容性</td>
+					<td>4/10</td>
+					<td>🔴 红</td>
+					<td>使用 Anomaly 专属类但未声明依赖</td>
+			</tr>
+			<tr>
+					<td>本地化完整性</td>
+					<td>3/10</td>
+					<td>🔴 红</td>
+					<td>完全无 Languages 翻译文件夹</td>
+			</tr>
+			<tr>
+					<td>代码复用度</td>
+					<td>5/10</td>
+					<td>🟡 黄</td>
+					<td>有 Abstract 基类但提取不够充分</td>
+			</tr>
+			<tr>
+					<td>贴图规范性</td>
+					<td>7/10</td>
+					<td>🟢 绿</td>
+					<td>命名正确，分辨率部分过大</td>
+			</tr>
+			<tr>
+					<td>发布就绪度</td>
+					<td>4/10</td>
+					<td>🔴 红</td>
+					<td>P0 和 P1 问题需先修复</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="问题清单完整">问题清单（完整）</h2>
+<h3 id="p0--必须立即修复">P0 —— 必须立即修复</h3>
+<table>
+	<thead>
+			<tr>
+					<th>#</th>
+					<th>问题</th>
+					<th>具体位置</th>
+					<th>影响</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>P0-1</td>
+					<td>未声明 Anomaly DLC 依赖</td>
+					<td><code>About.xml</code> 的 <code>loadAfter</code> 仅含 <code>Ludeon.RimWorld</code>，但 <code>09_Resurrection.xml</code> 使用 <code>CompUseEffect_Resurrect</code> 等 Anomaly 专属类</td>
+					<td>无 Anomaly 玩家加载 Mod 时<strong>直接崩溃</strong></td>
+			</tr>
+			<tr>
+					<td>P0-2</td>
+					<td>无 Languages 翻译文件夹</td>
+					<td>所有 <code>label</code>/<code>description</code> 文本硬编码在 XML 中</td>
+					<td>不符合发布规范，社区翻译工具无法识别</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="p1--发布前务必修复">P1 —— 发布前务必修复</h3>
+<table>
+	<thead>
+			<tr>
+					<th>#</th>
+					<th>问题</th>
+					<th>对比参考</th>
+					<th>修复建议</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>P1-1</td>
+					<td><code>STD_FieldCut</code> 的 <code>armorCategory</code> 为 Heat 但 <code>hediff</code> 为 Cut</td>
+					<td>UF Heavy Industries 所有 DamageDef 的类型完全匹配</td>
+					<td>统一为 Cut，或分别设 Cut/Burn/Bolt</td>
+			</tr>
+			<tr>
+					<td>P1-2</td>
+					<td>分析台缺少 <code>minifiedDef</code>/<code>Flickable</code>/<code>Power</code>/<code>placeWorkers</code></td>
+					<td>UF 的所有工作台完整包含这些字段</td>
+					<td>逐字段添加，参考 UF 的实现</td>
+			</tr>
+			<tr>
+					<td>P1-3</td>
+					<td>EC-I/II/III 护盾充能速度完全相同时</td>
+					<td>UF 护盾每级充能递增</td>
+					<td>按等级设充能：8.5/15.0/28.0</td>
+			</tr>
+			<tr>
+					<td>P1-4</td>
+					<td>缺少 <code>Abstract</code> 基类提取</td>
+					<td>Ancot Library 大量使用 Abstract 减少重复</td>
+					<td>提取 Alloy/Weapon/Apparel/Ingestible 四个基类</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="p2--影响用户体验">P2 —— 影响用户体验</h3>
+<table>
+	<thead>
+			<tr>
+					<th>#</th>
+					<th>问题</th>
+					<th>建议</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>P2-1</td>
+					<td>Preview.png 547KB</td>
+					<td>压缩至 ≤ 100KB（参考 Mod 平均 ~60KB）</td>
+			</tr>
+			<tr>
+					<td>P2-2</td>
+					<td>III 级研究只要求 STD 分析台</td>
+					<td>添加 HiTechResearchBench + MultiAnalyzer 要求</td>
+			</tr>
+			<tr>
+					<td>P2-3</td>
+					<td>物品标签中英文混杂</td>
+					<td>统一使用中文或提供中英双语</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="p3--优化建议">P3 —— 优化建议</h3>
+<table>
+	<thead>
+			<tr>
+					<th>#</th>
+					<th>问题</th>
+					<th>建议</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>P3-1</td>
+					<td>独立 RecipeDef 过多</td>
+					<td>使用 <code>&lt;recipeMaker&gt;</code> 内嵌方式减少文件数</td>
+			</tr>
+			<tr>
+					<td>P3-2</td>
+					<td>护盾腰带缺少 <code>wornGraphicPath</code></td>
+					<td>添加穿戴渲染路径</td>
+			</tr>
+			<tr>
+					<td>P3-3</td>
+					<td>ResearchProjectDef 可提取 Abstract</td>
+					<td>公共字段提取到基类，具体项目继承</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="审查统计">审查统计</h2>
+<table>
+	<thead>
+			<tr>
+					<th>统计项</th>
+					<th>数值</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>审查 XML 文件数</td>
+					<td>9（全部 Def 文件）</td>
+			</tr>
+			<tr>
+					<td>审查非 XML 文件</td>
+					<td>1（About.xml）</td>
+			</tr>
+			<tr>
+					<td>参考 Mod 数量</td>
+					<td>6</td>
+			</tr>
+			<tr>
+					<td>发现问题总数</td>
+					<td>12</td>
+			</tr>
+			<tr>
+					<td>P0（致命）</td>
+					<td>2</td>
+			</tr>
+			<tr>
+					<td>P1（严重）</td>
+					<td>4</td>
+			</tr>
+			<tr>
+					<td>P2（体验）</td>
+					<td>3</td>
+			</tr>
+			<tr>
+					<td>P3（优化）</td>
+					<td>3</td>
+			</tr>
+			<tr>
+					<td>代码行数</td>
+					<td>663</td>
+			</tr>
+			<tr>
+					<td>引用参考代码段</td>
+					<td>6</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="方法论可复用性">方法论可复用性</h2>
+<p>这份审查报告的框架——参考 Mod 优先对比 + 三级评分 + P0→P3 优先级——可以直接用于审查其他 RimWorld Mod。复用步骤：</p>
+<ol>
+<li>根据目标 Mod 的功能选取 3-6 个功能相似的已发布 Mod 作为参考</li>
+<li>逐 XML 文件对比字段差异</li>
+<li>每个差异标注严重等级和建议修复方式</li>
+<li>汇总为健康度评分和问题清单</li>
+</ol>
+<h2 id="审查者">审查者</h2>
+<p>审查者身份待确认（报告中未注明审查者姓名或身份）。</p>
+<h2 id="相关项目">相关项目</h2>
+<ul>
+<li><strong>STD Template Mod</strong>——被审查的目标</li>
+<li><strong>RimWorld Mod 制作完全指南</strong>——对应开发教程</li>
+</ul>
+<h2 id="完成时间">完成时间</h2>
+<p><strong>2026 年 6 月 29 日</strong></p>
+</div><nav class="post-navigation" style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(100,140,220,0.15);"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem;"><a href="/posts/std-template-mod/" style="color: #8a9cc0; font-weight: 400; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.color='#c0d4f4'" onmouseout="this.style.color='#8a9cc0'">← STD Template Mod（遗落科技）</a><a href="/posts/rimworld-mod-guide/" style="color: #8a9cc0; font-weight: 400; text-decoration: none; transition: all 0.2s ease; text-align: right;" onmouseover="this.style.color='#c0d4f4'" onmouseout="this.style.color='#8a9cc0'">RimWorld Mod 制作完全指南（STD 实战版） →</a></div><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;"><a href="/projects/" style="color: #f0c060; font-weight: 500; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.textShadow='0 0 10px rgba(240,192,96,0.4)'" onmouseout="this.style.textShadow='none'">← 返回项目列表</a><a href="/posts/" style="color: #8a9cc0; font-weight: 400; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.color='#c0d4f4'" onmouseout="this.style.color='#8a9cc0'">所有记录 →</a>
+            </div>
+        </nav><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2026-06-30</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 X" data-sharer="x" data-url="https://Adxs-hm.github.io/posts/std-mod-review/" data-title="STD Template Mod 审查报告 v2" data-hashtags="RimWorld,代码审查,质量评估,Mod"><i class="fab fa-x-twitter" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Threads" data-sharer="threads" data-url="https://Adxs-hm.github.io/posts/std-mod-review/" data-title="STD Template Mod 审查报告 v2"><i class="fab fa-threads" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://Adxs-hm.github.io/posts/std-mod-review/" data-hashtag="RimWorld"><i class="fab fa-facebook-square" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://Adxs-hm.github.io/posts/std-mod-review/"><i class="fab fa-linkedin" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://Adxs-hm.github.io/posts/std-mod-review/" data-title="STD Template Mod 审查报告 v2"><i class="fab fa-hacker-news" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://Adxs-hm.github.io/posts/std-mod-review/" data-title="STD Template Mod 审查报告 v2"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://Adxs-hm.github.io/posts/std-mod-review/" data-title="STD Template Mod 审查报告 v2"><i class="fab fa-weibo" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Diaspora" data-sharer="diaspora" data-url="https://Adxs-hm.github.io/posts/std-mod-review/" data-title="STD Template Mod 审查报告 v2" data-description="参考 Mod 优先对比法的代码审查——以 6 个已发布 Mod 为基准，12 项待整改清单，三级健康度评分"><i class="fab fa-diaspora" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=https%3a%2f%2fAdxs-hm.github.io%2fposts%2fstd-mod-review%2f&amp;text=STD%20Template%20Mod%20%e5%ae%a1%e6%9f%a5%e6%8a%a5%e5%91%8a%20v2" target="_blank" title="分享到 Telegram"><i class="fab fa-telegram" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags" aria-hidden="true"></i>&nbsp;<a href="/tags/rimworld/">RimWorld</a>,&nbsp;<a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5/">代码审查</a>,&nbsp;<a href="/tags/%E8%B4%A8%E9%87%8F%E8%AF%84%E4%BC%B0/">质量评估</a>,&nbsp;<a href="/tags/mod/">Mod</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/std-template-mod/" class="prev" rel="prev" title="STD Template Mod（遗落科技）"><i class="fas fa-angle-left" aria-hidden="true"></i>STD Template Mod（遗落科技）</a>
+            <a href="/posts/rimworld-mod-guide/" class="next" rel="next" title="RimWorld Mod 制作完全指南（STD 实战版）">RimWorld Mod 制作完全指南（STD 实战版）<i class="fas fa-angle-right" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><span style="font-size:0.78rem;color:#6a80a0;">本站所有内容为原创或基于个人创作整理。如有与其他作品相似之处，纯属巧合。</span></div><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.163.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 1.0.0"><i class="far fa-kiss-wink-heart" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright" aria-hidden="true"></i><span itemprop="copyrightYear">2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">JHD</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons">
+            <a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden">
+            <a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/css/space-theme-v2.css"><script src="/lib/autocomplete/autocomplete.min.js"></script><script src="/lib/fuse/fuse.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"fuseIndexURL":"/index.json","fuseOpts":{"distance":100,"findAllMatches":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"minMatchCharLength":2,"threshold":0.3},"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"fuse"}};</script><script src="/js/theme.js"></script>
+        <script src="/js/space-fx.js"></script>
+        
+        <script src="/js/jhd-search.js"></script>
+    </body>
+</html>

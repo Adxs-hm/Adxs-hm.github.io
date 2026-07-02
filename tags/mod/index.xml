@@ -1,0 +1,34 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Mod - 标签 - JHD</title>
+        <link>https://Adxs-hm.github.io/tags/mod/</link>
+        <description>Mod - 标签 - JHD</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 30 Jun 2026 12:36:14 &#43;0800</lastBuildDate><atom:link href="https://Adxs-hm.github.io/tags/mod/" rel="self" type="application/rss+xml" /><item>
+    <title>RimWorld Mod 制作完全指南（STD 实战版）</title>
+    <link>https://Adxs-hm.github.io/posts/rimworld-mod-guide/</link>
+    <pubDate>Tue, 30 Jun 2026 12:36:14 &#43;0800</pubDate>
+    <author>JHD</author>
+    <guid>https://Adxs-hm.github.io/posts/rimworld-mod-guide/</guid>
+    <description><![CDATA[<h2 id="这是什么">这是什么</h2>
+<p>一份以 <strong>STD Template Mod 开发过程为实战案例</strong>的 RimWorld 1.6 Mod 制作教学指南。704 行，最核心的价值是 <strong>18 个真实 Bug 的精确诊断</strong>——不是理论读物，而是踩完坑之后的复盘笔记。</p>]]></description>
+</item>
+<item>
+    <title>STD Template Mod 审查报告 v2</title>
+    <link>https://Adxs-hm.github.io/posts/std-mod-review/</link>
+    <pubDate>Tue, 30 Jun 2026 12:36:14 &#43;0800</pubDate>
+    <author>JHD</author>
+    <guid>https://Adxs-hm.github.io/posts/std-mod-review/</guid>
+    <description><![CDATA[<h2 id="这是什么">这是什么</h2>
+<p>一份针对 <strong>STD Template Mod</strong> 的代码审查报告。采用&quot;<strong>参考 Mod 优先对比法</strong>&quot;——不是凭空编造标准，而是以 6 个实际发布且稳定运行的 Mod 作为对比基准，逐项审查 STD 的代码质量。</p>]]></description>
+</item>
+<item>
+    <title>STD Template Mod（遗落科技）</title>
+    <link>https://Adxs-hm.github.io/posts/std-template-mod/</link>
+    <pubDate>Tue, 30 Jun 2026 12:36:14 &#43;0800</pubDate>
+    <author>JHD</author>
+    <guid>https://Adxs-hm.github.io/posts/std-template-mod/</guid>
+    <description><![CDATA[<h2 id="这个项目是什么">这个项目是什么</h2>
+<p><strong>STD Template Mod</strong> 是 RimWorld 1.6 的一个纯 XML 内容模组（零 C# 代码）。作者 <strong>JHD</strong>，packageId <code>STD.Template.EarlyGame</code>，中文名&quot;遗落科技&quot;。</p>]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>RimWorld Mod 制作完全指南（STD 实战版） - JHD</title><meta name="Description" content="以 STD Template Mod 为案例的 RimWorld 1.6 模组开发实战教程——18 个真实 Bug 剖析、XML 字段速查表、贴图管线全流程"><meta property="og:url" content="https://Adxs-hm.github.io/posts/rimworld-mod-guide/">
+	<meta property="og:site_name" content="JHD">
+	<meta property="og:title" content="RimWorld Mod 制作完全指南（STD 实战版）">
+	<meta property="og:description" content="以 STD Template Mod 为案例的 RimWorld 1.6 模组开发实战教程——18 个真实 Bug 剖析、XML 字段速查表、贴图管线全流程">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-06-30T12:36:14+08:00">
+		<meta property="article:modified_time" content="2026-06-30T12:36:14+08:00">
+		<meta property="article:tag" content="RimWorld">
+		<meta property="article:tag" content="教程">
+		<meta property="article:tag" content="Mod">
+		<meta property="article:tag" content="技术文档">
+		<meta property="og:image" content="https://Adxs-hm.github.io/images/planet-avatar.svg">
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://Adxs-hm.github.io/images/planet-avatar.svg">
+	<meta name="twitter:title" content="RimWorld Mod 制作完全指南（STD 实战版）">
+	<meta name="twitter:description" content="以 STD Template Mod 为案例的 RimWorld 1.6 模组开发实战教程——18 个真实 Bug 剖析、XML 字段速查表、贴图管线全流程">
+<meta name="application-name" content="JHD">
+<meta name="apple-mobile-web-app-title" content="JHD">
+<meta name="referrer" content="no-referrer" /><meta name="theme-color" content="#0a0a1a"><meta name="msapplication-TileColor" content="#0d0d2b"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#e9b847"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Adxs-hm.github.io/posts/rimworld-mod-guide/" /><link rel="prev" href="https://Adxs-hm.github.io/posts/std-mod-review/" /><link rel="next" href="https://Adxs-hm.github.io/posts/zombie-apocalypse/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/css/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "RimWorld Mod 制作完全指南（STD 实战版）",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Adxs-hm.github.io\/posts\/rimworld-mod-guide\/"
+        },"image": ["https:\/\/Adxs-hm.github.io\/images\/planet-avatar.svg"],"genre": "posts","keywords": "RimWorld, 教程, Mod, 技术文档","wordcount":  1898 ,
+        "url": "https:\/\/Adxs-hm.github.io\/posts\/rimworld-mod-guide\/","datePublished": "2026-06-30T12:36:14+08:00","dateModified": "2026-06-30T12:36:14+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "JHD"
+            },"description": "以 STD Template Mod 为案例的 RimWorld 1.6 模组开发实战教程——18 个真实 Bug 剖析、XML 字段速查表、贴图管线全流程"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script>
+          const query = window.matchMedia('(prefers-color-scheme: dark)');
+          function applyTheme() {
+            let theme = window.localStorage?.getItem('theme') || 'dark';
+            let isDark = theme === 'dark' || (theme === 'auto' && query.matches);
+            document.body.setAttribute('theme', isDark? 'dark' : 'light');
+            document.body.setAttribute('cfg-theme', theme);
+          }
+          applyTheme();
+          query.addEventListener('change', applyTheme);
+        </script>
+
+        <div id="mask"></div>
+
+        <div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="JHD"><span class="header-title-pre"><span class='planet-icon'>🪐</span></span>JHD</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/articles/" title="所有文章记录"> 文章 </a><a class="menu-item" href="/projects/" title="所有项目记录"> 项目 </a><a class="menu-item" href="/milestones/" title="关键节点与里程碑"> 里程碑 </a><a class="menu-item" href="/about/" title="关于 JHD"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索记录..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="JHD"><span class="header-title-pre"><span class='planet-icon'>🪐</span></span>JHD</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索记录..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/articles/" title="所有文章记录">文章</a><a class="menu-item" href="/projects/" title="所有项目记录">项目</a><a class="menu-item" href="/milestones/" title="关键节点与里程碑">里程碑</a><a class="menu-item" href="/about/" title="关于 JHD">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">RimWorld Mod 制作完全指南（STD 实战版）</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle" aria-hidden="true"></i>JHD</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E9%A1%B9%E7%9B%AE/"><i class="far fa-folder" aria-hidden="true"></i>项目</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt" aria-hidden="true"></i>&nbsp;<time datetime="2026-06-30">2026-06-30</time>&nbsp;<i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;约 1898 字&nbsp;
+                <i class="far fa-clock" aria-hidden="true"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#这是什么">这是什么</a></li>
+    <li><a href="#内容结构">内容结构</a>
+      <ul>
+        <li><a href="#第一部分bug-百科全书350-行4-类-18-例">第一部分：Bug 百科全书（350+ 行，4 类 18 例）</a>
+          <ul>
+            <li><a href="#xml-字段名错误5-例">XML 字段名错误（5 例）</a></li>
+            <li><a href="#贴图与渲染4-例">贴图与渲染（4 例）</a></li>
+            <li><a href="#武器装备4-例">武器/装备（4 例）</a></li>
+            <li><a href="#数据格式3-例">数据格式（3 例）</a></li>
+          </ul>
+        </li>
+        <li><a href="#第二部分xml-字段速查表150-行">第二部分：XML 字段速查表（150+ 行）</a></li>
+        <li><a href="#第三部分贴图管线">第三部分：贴图管线</a></li>
+        <li><a href="#第四部分扩展路线图">第四部分：扩展路线图</a></li>
+      </ul>
+    </li>
+    <li><a href="#教程特色">教程特色</a></li>
+    <li><a href="#目标读者">目标读者</a></li>
+    <li><a href="#文件统计">文件统计</a></li>
+    <li><a href="#相关项目">相关项目</a></li>
+    <li><a href="#完成时间">完成时间</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="这是什么">这是什么</h2>
+<p>一份以 <strong>STD Template Mod 开发过程为实战案例</strong>的 RimWorld 1.6 Mod 制作教学指南。704 行，最核心的价值是 <strong>18 个真实 Bug 的精确诊断</strong>——不是理论读物，而是踩完坑之后的复盘笔记。</p>
+<p>每一个 Bug 都标注了：错误现象、根因、涉及的具体 XML 标签、修复方式、以及如何防止再次踩坑。</p>
+<h2 id="内容结构">内容结构</h2>
+<h3 id="第一部分bug-百科全书350-行4-类-18-例">第一部分：Bug 百科全书（350+ 行，4 类 18 例）</h3>
+<h4 id="xml-字段名错误5-例">XML 字段名错误（5 例）</h4>
+<table>
+	<thead>
+			<tr>
+					<th>Bug</th>
+					<th>错误</th>
+					<th>正确</th>
+					<th>教训</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>护盾不充能</td>
+					<td><code>&lt;layer&gt;</code></td>
+					<td><code>&lt;layers&gt;</code></td>
+					<td>RimWorld XML 中几乎所有列表型字段都使用<strong>复数形式</strong>。<code>layer</code> 是 RimWorld 内部枚举，不是 XML 标签</td>
+			</tr>
+			<tr>
+					<td>研究项目不显示</td>
+					<td><code>&lt;researchTab&gt;</code></td>
+					<td><code>&lt;tab&gt;</code></td>
+					<td><code>researchTab</code> 是研究项目的<strong>分类标签值</strong>，不是 XML 字段名。正确的字段是 <code>&lt;tab&gt;</code>，值才是类别字符串</td>
+			</tr>
+			<tr>
+					<td>建筑技能需求无效</td>
+					<td><code>constructionSkillPrerequisite</code> 写在 ThingDef 根级别</td>
+					<td>写在 <code>&lt;recipeMaker&gt;</code> 内部</td>
+					<td>字段嵌套层级比字段名更重要。外层只识别 <code>recipeMaker</code> 对象，skill 相关字段必须在其内部作用域</td>
+			</tr>
+			<tr>
+					<td>技能需求不生效</td>
+					<td><code>&lt;skillRequirements&gt;采矿 8&lt;/skillRequirements&gt;</code></td>
+					<td><code>&lt;li&gt;采矿 8&lt;/li&gt;</code></td>
+					<td>RimWorld XML 使用 <code>&lt;li&gt;</code> 作列表项标签。直接写入文本字符串被解析器忽略</td>
+			</tr>
+			<tr>
+					<td>社交判定异常</td>
+					<td><code>socialPropernessMatters</code></td>
+					<td>在 1.6 被移除</td>
+					<td>版本升级会<strong>静默</strong>删除字段，不报错也不警告。需要查看官方更新日志</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>XML 字段名错误的核心教训</strong>：RimWorld 的 XML 解析器对无效字段<strong>静默忽略</strong>——不会报错，不会警告，但功能就是不起作用。这使得字段名错误成为最难排查的 Bug 类型。</p>
+<h4 id="贴图与渲染4-例">贴图与渲染（4 例）</h4>
+<table>
+	<thead>
+			<tr>
+					<th>Bug</th>
+					<th>根因</th>
+					<th>修复</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>装备贴图不显示</td>
+					<td><code>Graphic_StackCount</code> 需要多张贴图变体但当只有一张时渲染失败</td>
+					<td>改用 <code>Graphic_Single</code></td>
+			</tr>
+			<tr>
+					<td>穿戴贴图缺失</td>
+					<td>穿戴贴图需要 5 体型 × 3 方向 = 15 张完整变体集</td>
+					<td>使用 <code>useWornGraphicMask=true</code> 或生成完整贴图集</td>
+			</tr>
+			<tr>
+					<td>图标在 UI 中&quot;肥大&quot;</td>
+					<td>512×512 贴图在 UI 中显示过大</td>
+					<td>标准 UI 图标分辨率 256×256</td>
+			</tr>
+			<tr>
+					<td>侧面贴图左右颠倒</td>
+					<td>RimWorld 的侧面渲染不会自动镜像</td>
+					<td>贴图制作时手动翻转 → 重命名</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>贴图命名规范：</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        <span class="copy" title="复制到剪贴板"><i class="far fa-copy" aria-hidden="true"></i></span>
+    </div><pre tabindex="0"><code>正确：STD_FieldGun.png, STD_FieldGun_back.png, STD_FieldGun_side.png
+错误：STD-Field-Gun.png, fieldGun.png, 力场枪.png</code></pre></div>
+<h4 id="武器装备4-例">武器/装备（4 例）</h4>
+<table>
+	<thead>
+			<tr>
+					<th>Bug</th>
+					<th>根因</th>
+					<th>修复</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>近战武器添加远程 Verb → 崩溃</td>
+					<td>VerbProperties 在近战武器上是无效的。<code>&lt;weaponTags&gt;</code> 决定武器类型的互斥性</td>
+					<td>移除 <code>&lt;verbs&gt;</code> 节点或改为纯远程武器</td>
+			</tr>
+			<tr>
+					<td>护甲穿透无效</td>
+					<td><code>armorPenetrationSharp</code> 只在 Weapon 层（statBases）有效，在 Tool 层（近战攻击动作）无效</td>
+					<td>移至 <code>&lt;statBases&gt;</code> 而非 <code>&lt;tools&gt;/&lt;li&gt;/&lt;capacities&gt;/&lt;li&gt;</code></td>
+			</tr>
+			<tr>
+					<td>MiningSpeed/PlantWorkSpeed 无效</td>
+					<td>这两个 stat 不在 <code>statBases</code> 的白名单中</td>
+					<td>使用 Hediff 的 <code>statOffsets</code> 间接提供加成</td>
+			</tr>
+			<tr>
+					<td>护盾不充能</td>
+					<td>缺少 <code>tickerType=&quot;Normal&quot;</code></td>
+					<td>添加 <code>&lt;tickerType&gt;Normal&lt;/tickerType&gt;</code> 确保护盾 Comp 的 Tick 方法被调用</td>
+			</tr>
+	</tbody>
+</table>
+<h4 id="数据格式3-例">数据格式（3 例）</h4>
+<table>
+	<thead>
+			<tr>
+					<th>Bug</th>
+					<th>修复</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>MedicalQualityMax</code> 为字符串 <code>&quot;2.5&quot;</code></td>
+					<td>改为浮点数格式 <code>2.5</code>（无引号）</td>
+			</tr>
+			<tr>
+					<td>defName 以数字结尾（如 <code>Ration_3</code>）</td>
+					<td>改为 <code>Ration_III</code> 或 <code>Ration_T3</code></td>
+			</tr>
+			<tr>
+					<td>装备渲染溢出</td>
+					<td>添加 <code>useWornGraphicMask=true</code></td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="第二部分xml-字段速查表150-行">第二部分：XML 字段速查表（150+ 行）</h3>
+<p>覆盖 7 大 Def 类型的完整字段映射，以下为每类中最常出错的字段：</p>
+<p><strong>Apparel（装备）</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>字段</th>
+					<th>位置</th>
+					<th>类型</th>
+					<th>示例</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>apparelLayers</code></td>
+					<td>ThingDef 根</td>
+					<td>列表</td>
+					<td><code>&lt;li&gt;Belt&lt;/li&gt;</code></td>
+			</tr>
+			<tr>
+					<td><code>armorRating</code></td>
+					<td>statBases</td>
+					<td>浮点</td>
+					<td><code>&lt;Sharp&gt;0.40&lt;/Sharp&gt;</code></td>
+			</tr>
+			<tr>
+					<td><code>insulationCold</code></td>
+					<td>statBases</td>
+					<td>浮点</td>
+					<td><code>&lt;Insulation_Cold&gt;-50&lt;/Insulation_Cold&gt;</code></td>
+			</tr>
+			<tr>
+					<td><code>wornGraphicPath</code></td>
+					<td>graphicData</td>
+					<td>路径</td>
+					<td><code>Things/Item/STD_ShieldBelt</code></td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>Weapon（武器）</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>字段</th>
+					<th>位置</th>
+					<th>类型</th>
+					<th>示例</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>verbs</code></td>
+					<td>ThingDef → verbs → li</td>
+					<td>嵌套对象</td>
+					<td>含 <code>verbClass</code>, <code>defaultProjectile</code>, <code>warmupTime</code>, <code>range</code> 等子字段</td>
+			</tr>
+			<tr>
+					<td><code>weaponTags</code></td>
+					<td>ThingDef 根</td>
+					<td>列表</td>
+					<td><code>&lt;li&gt;Gun&lt;/li&gt;</code></td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>Research（研究）</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>字段</th>
+					<th>位置</th>
+					<th>类型</th>
+					<th>示例</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>tab</code></td>
+					<td>ResearchProjectDef</td>
+					<td>字符串</td>
+					<td><code>STD</code></td>
+			</tr>
+			<tr>
+					<td><code>baseCost</code></td>
+					<td>ResearchProjectDef</td>
+					<td>整数</td>
+					<td><code>1500</code></td>
+			</tr>
+			<tr>
+					<td><code>prerequisites</code></td>
+					<td>ResearchProjectDef</td>
+					<td>列表</td>
+					<td><code>&lt;li&gt;STD_BasicDecoding&lt;/li&gt;</code></td>
+			</tr>
+			<tr>
+					<td><code>requiredResearchFacilities</code></td>
+					<td>ResearchProjectDef</td>
+					<td>列表</td>
+					<td><code>&lt;li&gt;HiTechResearchBench&lt;/li&gt;</code></td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="第三部分贴图管线">第三部分：贴图管线</h3>
+<p>完整的工作流：</p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-text">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        <span class="copy" title="复制到剪贴板"><i class="far fa-copy" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Blender 建模（精确几何体 + 材质）
+</span></span><span class="line"><span class="cl">  → Cycles 渲染为高分辨率 PNG（1024×1024）
+</span></span><span class="line"><span class="cl">    → AI 工具转风格（统一为 RimWorld 水彩/手绘风格）
+</span></span><span class="line"><span class="cl">      → Python PIL 批处理（裁剪 256×256、格式转换、命名规范化）
+</span></span><span class="line"><span class="cl">        → 放入 Textures/ 对应子目录
+</span></span><span class="line"><span class="cl">          → 游戏内验证（UI 图标 + 世界渲染 + 穿戴效果）</span></span></code></pre></div></div>
+<p><strong>Python 批处理脚本模板：</strong></p>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        <span class="copy" title="复制到剪贴板"><i class="far fa-copy" aria-hidden="true"></i></span>
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageFilter</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;output/&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;output/</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span> <span class="n">Image</span><span class="o">.</span><span class="n">LANCZOS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 轻微锐化补偿缩放损失</span>
+</span></span><span class="line"><span class="cl">    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ImageFilter</span><span class="o">.</span><span class="n">SHARPEN</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;textures/Things/Item/</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;PNG&#39;</span><span class="p">,</span> <span class="n">optimize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></span></span></code></pre></div></div>
+<h3 id="第四部分扩展路线图">第四部分：扩展路线图</h3>
+<table>
+	<thead>
+			<tr>
+					<th>阶段</th>
+					<th>内容</th>
+					<th>技术门槛</th>
+					<th>预期工作量</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>纯 XML</td>
+					<td>四级产物、更多 DamageDef、自定义 Trait</td>
+					<td>低</td>
+					<td>1-2 周</td>
+			</tr>
+			<tr>
+					<td>纯 XML</td>
+					<td>更多 Hediff 效果（临时变形、元素免疫）</td>
+					<td>低</td>
+					<td>1 周</td>
+			</tr>
+			<tr>
+					<td>需要 C#</td>
+					<td>武器远程模式切换</td>
+					<td>中</td>
+					<td>3-5 天</td>
+			</tr>
+			<tr>
+					<td>需要 C#</td>
+					<td>护盾过载机制（消耗充能换取爆发效果）</td>
+					<td>中</td>
+					<td>1 周</td>
+			</tr>
+			<tr>
+					<td>需要 C#</td>
+					<td>套装共鸣系统（装备 2/3/4 件同系列触发额外效果）</td>
+					<td>高</td>
+					<td>2-3 周</td>
+			</tr>
+			<tr>
+					<td>远期</td>
+					<td>模板觉醒事件——世界中随机刷出 STD 遗迹</td>
+					<td>高（需自定义 WorldObject + Incident）</td>
+					<td>4-6 周</td>
+			</tr>
+			<tr>
+					<td>远期</td>
+					<td>起源任务线——完整叙事链引导玩家探索 STD 科技</td>
+					<td>高（需自定义 Quest + Faction）</td>
+					<td>8-12 周</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="教程特色">教程特色</h2>
+<ul>
+<li><strong>不是&quot;教你做 Mod&quot;的泛泛之谈</strong>——每个知识点都来自一个具体踩过的、修好了的 Bug</li>
+<li><strong>Bug 被编号和分类</strong>——查找方便，类似&quot;Bug 速查手册&quot;</li>
+<li><strong>配合代码示例</strong>——每个 Bug 附带错误的 XML 片段和修复后的对比</li>
+<li><strong>版本锁定</strong>——明确标注&quot;RimWorld 1.6&quot;，避免跨版本信息误导</li>
+<li><strong>可直接作为新 Mod 的启动参考</strong>——XML 速查表 + 贴图命名规范 + 最佳实践 = 新建 Mod 的快速起步指南</li>
+</ul>
+<h2 id="目标读者">目标读者</h2>
+<ul>
+<li>有基本 XML 知识但刚接触 RimWorld Mod 开发的初学者</li>
+<li>踩过坑后想系统复盘的中级开发者</li>
+<li>需要快速查阅字段格式和命名规范的 Mod 维护者</li>
+</ul>
+<h2 id="文件统计">文件统计</h2>
+<table>
+	<thead>
+			<tr>
+					<th>项目</th>
+					<th>数值</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>总行数</td>
+					<td>704</td>
+			</tr>
+			<tr>
+					<td>Bug 案例</td>
+					<td>18</td>
+			</tr>
+			<tr>
+					<td>XML 字段速查覆盖</td>
+					<td>7 大 Def 类型，30+ 字段</td>
+			</tr>
+			<tr>
+					<td>参考代码片段</td>
+					<td>12+</td>
+			</tr>
+			<tr>
+					<td>贴图管线步骤</td>
+					<td>5 步全流程</td>
+			</tr>
+			<tr>
+					<td>扩展路线图阶段</td>
+					<td>7 个阶段</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="相关项目">相关项目</h2>
+<ul>
+<li><strong>STD Template Mod</strong>——本教程的实战案例</li>
+<li><strong>STD Mod 审查报告 v2</strong>——对应质量评估</li>
+</ul>
+<h2 id="完成时间">完成时间</h2>
+<p>约 <strong>2026 年 6 月</strong></p>
+</div><nav class="post-navigation" style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(100,140,220,0.15);"><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem;"><a href="/posts/std-mod-review/" style="color: #8a9cc0; font-weight: 400; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.color='#c0d4f4'" onmouseout="this.style.color='#8a9cc0'">← STD Template Mod 审查报告 v2</a><a href="/posts/zombie-apocalypse/" style="color: #8a9cc0; font-weight: 400; text-decoration: none; transition: all 0.2s ease; text-align: right;" onmouseover="this.style.color='#c0d4f4'" onmouseout="this.style.color='#8a9cc0'">丧尸危世 →</a></div><div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;"><a href="/projects/" style="color: #f0c060; font-weight: 500; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.textShadow='0 0 10px rgba(240,192,96,0.4)'" onmouseout="this.style.textShadow='none'">← 返回项目列表</a><a href="/posts/" style="color: #8a9cc0; font-weight: 400; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.color='#c0d4f4'" onmouseout="this.style.color='#8a9cc0'">所有记录 →</a>
+            </div>
+        </nav><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2026-06-30</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 X" data-sharer="x" data-url="https://Adxs-hm.github.io/posts/rimworld-mod-guide/" data-title="RimWorld Mod 制作完全指南（STD 实战版）" data-hashtags="RimWorld,教程,Mod,技术文档"><i class="fab fa-x-twitter" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Threads" data-sharer="threads" data-url="https://Adxs-hm.github.io/posts/rimworld-mod-guide/" data-title="RimWorld Mod 制作完全指南（STD 实战版）"><i class="fab fa-threads" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://Adxs-hm.github.io/posts/rimworld-mod-guide/" data-hashtag="RimWorld"><i class="fab fa-facebook-square" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Linkedin" data-sharer="linkedin" data-url="https://Adxs-hm.github.io/posts/rimworld-mod-guide/"><i class="fab fa-linkedin" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://Adxs-hm.github.io/posts/rimworld-mod-guide/" data-title="RimWorld Mod 制作完全指南（STD 实战版）"><i class="fab fa-hacker-news" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://Adxs-hm.github.io/posts/rimworld-mod-guide/" data-title="RimWorld Mod 制作完全指南（STD 实战版）"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://Adxs-hm.github.io/posts/rimworld-mod-guide/" data-title="RimWorld Mod 制作完全指南（STD 实战版）"><i class="fab fa-weibo" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Diaspora" data-sharer="diaspora" data-url="https://Adxs-hm.github.io/posts/rimworld-mod-guide/" data-title="RimWorld Mod 制作完全指南（STD 实战版）" data-description="以 STD Template Mod 为案例的 RimWorld 1.6 模组开发实战教程——18 个真实 Bug 剖析、XML 字段速查表、贴图管线全流程"><i class="fab fa-diaspora" aria-hidden="true"></i></a><a href="https://t.me/share/url?url=https%3a%2f%2fAdxs-hm.github.io%2fposts%2frimworld-mod-guide%2f&amp;text=RimWorld%20Mod%20%e5%88%b6%e4%bd%9c%e5%ae%8c%e5%85%a8%e6%8c%87%e5%8d%97%ef%bc%88STD%20%e5%ae%9e%e6%88%98%e7%89%88%ef%bc%89" target="_blank" title="分享到 Telegram"><i class="fab fa-telegram" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags" aria-hidden="true"></i>&nbsp;<a href="/tags/rimworld/">RimWorld</a>,&nbsp;<a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>,&nbsp;<a href="/tags/mod/">Mod</a>,&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/">技术文档</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/std-mod-review/" class="prev" rel="prev" title="STD Template Mod 审查报告 v2"><i class="fas fa-angle-left" aria-hidden="true"></i>STD Template Mod 审查报告 v2</a>
+            <a href="/posts/zombie-apocalypse/" class="next" rel="next" title="丧尸危世">丧尸危世<i class="fas fa-angle-right" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><span style="font-size:0.78rem;color:#6a80a0;">本站所有内容为原创或基于个人创作整理。如有与其他作品相似之处，纯属巧合。</span></div><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.163.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 1.0.0"><i class="far fa-kiss-wink-heart" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright" aria-hidden="true"></i><span itemprop="copyrightYear">2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">JHD</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons">
+            <a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div id="fixed-buttons-hidden">
+            <a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/css/space-theme-v2.css"><script src="/lib/autocomplete/autocomplete.min.js"></script><script src="/lib/fuse/fuse.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script src="/lib/clipboard/clipboard.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script>window.config={"comment":{},"lightgallery":true,"search":{"fuseIndexURL":"/index.json","fuseOpts":{"distance":100,"findAllMatches":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"minMatchCharLength":2,"threshold":0.3},"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":30,"type":"fuse"}};</script><script src="/js/theme.js"></script>
+        <script src="/js/space-fx.js"></script>
+        
+        <script src="/js/jhd-search.js"></script>
+    </body>
+</html>
